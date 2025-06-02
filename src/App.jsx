@@ -3,7 +3,6 @@ import Header from './components/Header';
 import Landing from './pages/Landing';
 import Pokemons from './pages/Pokemons';
 import Jugar from './pages/Jugar';
-import './App.css';
 
 function App() {
   return (
