@@ -6,7 +6,7 @@ function Header() {
     <header style={{background:'#eee',padding:'1rem 0',marginBottom:'2rem'}}>
       <nav style={{display:'flex',justifyContent:'center',gap:'2rem'}}>
         <Link to="/">Inicio</Link>
-        <Link to="/pokemons">Pokemons</Link>
+        <Link to="/listado">Pokemons</Link>
         <Link to="/jugar">Jugar</Link>
       </nav>
     </header>
