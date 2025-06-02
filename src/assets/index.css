@@ -1,4 +1,5 @@
-/* Basic styles for the Pokémon app */
+/* Se utiliza para estilos globales que afectan a toda la aplicación, como el diseño del body, tipografía y configuraciones generales.
+Asegura consistencia en todas las páginas y componentes. */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -30,4 +31,3 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Add more styles as needed */
