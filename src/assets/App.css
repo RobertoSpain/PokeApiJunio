@@ -1,4 +1,9 @@
 /* Se usa para estilos específicos del componente App.vue o del diseño principal. */
+body {
+  background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+  min-height: 100vh;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -36,8 +41,34 @@
 
 .card {
   padding: 2em;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #0002;
+  margin: 1em auto;
+  max-width: 400px;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: bold;
+  color: #236d1e;
+  margin-bottom: 0.5em;
+}
+
+button {
+  background: linear-gradient(90deg, #7ac74c 0%, #30a7d7 100%);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button:hover {
+  background: linear-gradient(90deg, #30a7d7 0%, #7ac74c 100%);
 }

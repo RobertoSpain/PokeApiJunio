@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Detalle } from './Detalle';
+import '../assets/Listado.css';
 
 const API_URL = 'https://pokeapi.co/api/v2/pokemon';
 
@@ -27,39 +28,31 @@ export function Listado() {
   }, []);
 
   return (
-    <section style={{ maxWidth: '900px', margin: '0 auto', padding: '1rem' }}>
+    <section className="listado-section">
       <h2>Pokémons</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', justifyContent: 'center' }}>
+      <div className="listado-grid">
         {pokemones.map((p) => {
           const id = p.url.split('/').filter(Boolean).pop();
           return (
             <div
               key={p.name}
-              style={{
-                background: '#f8f8f8',
-                padding: '1rem',
-                borderRadius: '12px',
-                width: '150px',
-                textAlign: 'center',
-                cursor: 'pointer',
-                boxShadow: '0 2px 8px #0001',
-              }}
+              className="pokemon-card"
               onClick={() => setPokemonSeleccionado(id)}
             >
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
                 alt={p.name}
-                style={{ width: '100px', height: '100px', objectFit: 'contain', marginBottom: '0.5rem' }}
+                className="pokemon-img"
               />
-              <b style={{ textTransform: 'capitalize' }}>{p.name}</b>
+              <b className="pokemon-name">{p.name}</b>
             </div>
           );
         })}
       </div>
-      <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
+      <div className="listado-cargar-mas">
         <button
           onClick={cargarMasPokemones}
-          style={{ padding: '0.5rem 1rem', borderRadius: '8px', border: 'none', background: '#1976d2', color: '#fff', cursor: 'pointer' }}
+          className="cargar-mas-btn"
         >
           Cargar más
         </button>

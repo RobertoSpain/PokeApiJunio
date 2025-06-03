@@ -1,0 +1,62 @@
+/* Listado.css - estilos para el listado de pokémon */
+
+.listado-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.listado-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.pokemon-card {
+  background: #f8f8f8;
+  padding: 1rem;
+  border-radius: 12px;
+  width: 150px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #0001;
+  transition: transform 0.15s;
+}
+.pokemon-card:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 6px 16px #0002;
+}
+
+.pokemon-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.pokemon-name {
+  text-transform: capitalize;
+}
+
+.listado-cargar-mas {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.cargar-mas-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #1976d2;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #0001;
+  transition: background 0.2s;
+}
+.cargar-mas-btn:hover {
+  background: #1251a3;
+}

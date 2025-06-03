@@ -4,25 +4,33 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #fff;
+  background: linear-gradient(135deg, #fffbe6 0%, #ffe082 100%);
   z-index: 1000;
   max-width: 500px;
   width: 90vw;
   max-height: 90vh;
   overflow-y: auto;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px #0003;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px #0004;
   padding: 2rem 1.5rem 1.5rem 1.5rem;
+  border: 3px solid #ffb347;
 }
 
 .btn-close {
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   cursor: pointer;
   background: none;
   border: none;
+  color: #e53935;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.btn-close:hover {
+  color: #b71c1c;
 }
 
 .imgDetalle {
