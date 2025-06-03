@@ -1,12 +1,18 @@
-/* Estilos para el detalle del Pokémon */
+/* Modal centrado y con scroll interno si es necesario */
 .detallesPokemon {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: #fff;
-  z-index: 3;
+  z-index: 1000;
+  max-width: 500px;
+  width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #0003;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
 }
 
 .btn-close {
@@ -19,13 +25,12 @@
   border: none;
 }
 
-.contenido {
-  padding: 2rem;
-  text-align: center;
+.imgDetalle {
+  width: 200px;
+  margin-bottom: 1rem;
 }
 
-.contenido img {
-  width: 200px;
+.nombrePokemon {
   margin-bottom: 1rem;
 }
 
@@ -42,8 +47,13 @@
   margin-bottom: 0.3rem;
 }
 
-.information .moves-container,
-.information ul[style] {
-  max-height: 200px;
+.moves {
+  margin-top: 1.5rem;
+}
+
+.moves-container {
+  max-height: 120px;
   overflow-y: auto;
+  padding: 0;
+  list-style: none;
 }
