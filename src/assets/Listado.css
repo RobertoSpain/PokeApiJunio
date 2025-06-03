@@ -60,3 +60,58 @@
 .cargar-mas-btn:hover {
   background: #1251a3;
 }
+
+.listado-busqueda-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.listado-busqueda {
+  width: 260px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 24px;
+  border: 2px solid #ffb347;
+  font-size: 1.1rem;
+  outline: none;
+  box-shadow: 0 2px 8px #0001;
+  background: #fffbe6;
+  color: #236d1e;
+  transition: border 0.2s, box-shadow 0.2s;
+  margin-bottom: 0.5rem;
+}
+.listado-busqueda:focus {
+  border: 2px solid #1976d2;
+  box-shadow: 0 4px 16px #1976d233;
+}
+.listado-busqueda::placeholder {
+  color: #bdb76b;
+  opacity: 1;
+  font-style: italic;
+}
+.listado-buscando {
+  text-align: center;
+  color: #1976d2;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.listado-error {
+  text-align: center;
+  color: #b71c1c;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.listado-vacio {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 600px) {
+  .listado-busqueda {
+    width: 98%;
+    font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+  }
+}
