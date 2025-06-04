@@ -1,54 +1,273 @@
+/* Estilos globales */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Estilos para la página de inicio */
-.landing-section {
-  max-width: 600px;
+.seccion-inicio {
+  max-width: 1000px;
   margin: 0 auto;
+  padding: 1.2rem 2rem 1.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 20px;
+  position: relative;
+  min-height: 90vh;
+  box-sizing: border-box;
+  flex: 1 0 auto;
+}
+
+.contenido-inicio {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Sección superior - contenido principal */
+.inicio-principal {
   text-align: center;
-  padding: 1rem;
+  padding: 0.1rem 0.4rem 0.1rem 0.4rem;
+  border-radius: 20px;
+  box-shadow: none;
+  background: none;
+  border: none;
+  backdrop-filter: none;
+  margin-bottom: 0.2rem;
 }
 
-.landing-title {
-  color: #236d1e;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+/* Sección central - imagen de fondo */
+.seccion-fondo {
+  height: 600px;
+  background: url('/fondo.png') no-repeat center center;
+  background-size: cover;
+  border-radius: 30px;
+  margin: 0.2rem 0 1.2rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  width: 100%;
+  min-width: 0;
 }
 
-.landing-description {
-  font-size: 1.2rem;
-  color: #333;
+/* Sección inferior - características */
+.contenedor-caracteristicas {
+  padding: 1.5rem 1rem 1.5rem 1rem;
+  border-radius: 20px;
+  box-shadow: none;
+  background: none;
+  border: none;
+  backdrop-filter: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 2rem;
 }
 
-.landing-features {
-  text-align: left;
-  margin: 2rem auto;
-  max-width: 400px;
-  list-style-position: inside;
-  padding: 0 1rem;
+.titulo {
+  color: #236d1e;
+  font-size: 2.5rem;
+  margin-bottom: 0.4rem;
+  margin-top: 0.2rem;
+  text-shadow: none;
 }
 
-.landing-features li {
-  margin-bottom: 1rem;
+.descripcion {
+  font-size: 1.15rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: none;
+  font-weight: 500;
   line-height: 1.4;
 }
 
+
+.boton-principal, .boton-secundario {
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.boton-principal {
+  background: linear-gradient(45deg, #ee1515, #ff4444);
+}
+
+.boton-secundario {
+  background: linear-gradient(45deg, #1976d2, #42a5f5);
+}
+
+.boton-principal:hover, .boton-secundario:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.lista-caracteristicas {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.lista-caracteristicas li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: 500;
+  line-height: 1.5;
+  background: none;
+  justify-content: center;
+}
+
+.lista-caracteristicas li:last-child {
+  margin-bottom: 0;
+}
+
+.icono {
+  font-size: 2rem;
+  margin-right: 1rem;
+  filter: none;
+}
+
+/* Decoración opcional para la pokébola */
+.decoracion-pokebola {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, #ee1515 50%, #fff 50%);
+  border-radius: 50%;
+  border: 3px solid #333;
+  opacity: 0.08;
+}
+
+.decoracion-pokebola::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 15px;
+  background: #333;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+
+/* Footer */
+.footer-landing {
+  width: 100vw;
+  left: 0;
+  right: 0;
+  position: relative;
+  background: #232629;
+  color: #fff;
+  text-align: center;
+  padding: 2.5rem 1rem 2rem 1rem;
+  margin: 0;
+  transform: none;
+  margin-top: 2rem;
+  box-sizing: border-box;
+}
+.footer-landing .footer-main {
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+}
+.footer-landing .footer-author {
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+}
+.footer-landing .footer-author a {
+  color: #ffd600;
+  text-decoration: none;
+  font-weight: 500;
+  transition: text-decoration 0.2s;
+}
+.footer-landing .footer-author a:hover {
+  text-decoration: underline;
+}
+.footer-landing .footer-social {
+  margin-top: 1.2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.footer-landing .footer-social a {
+  color: #ffd600;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: text-decoration 0.2s;
+}
+.footer-landing .footer-social a:hover {
+  text-decoration: underline;
+}
+
 /* Responsive */
-@media (max-width: 600px) {
-  .landing-section {
-    padding: 1rem;
+@media (max-width: 768px) {
+  .seccion-inicio {
+    padding: 0.5rem;
   }
-
-  .landing-title {
-    font-size: 1.8rem;
-    padding: 0 1rem;
+  .inicio-principal,
+  .contenedor-caracteristicas {
+    padding: 0.8rem 0.2rem 0.8rem 0.2rem;
   }
-
-  .landing-description {
-    font-size: 1.1rem;
-    padding: 0 1rem;
+  .seccion-fondo {
+    height: 200px;
+    border-radius: 12px;
   }
-
-  .landing-features {
-    margin: 1.5rem auto;
-    padding: 0 0.5rem;
+  .titulo {
+    font-size: 1.5rem;
+    margin-bottom: 0.7rem;
+  }
+  .descripcion {
+    font-size: 1rem;
+    margin-bottom: 0.7rem;
+  }
+  .contenedor-caracteristicas {
+    padding: 1rem 0.2rem 1rem 0.2rem;
+  }
+  .lista-caracteristicas li {
+    font-size: 1rem;
+  }
+  .icono {
+    font-size: 1.4rem;
+  }
+  .footer-landing {
+    font-size: 0.95rem;
+    padding: 1.5rem 0.2rem 1.5rem 0.2rem;
+  }
+  .footer-landing .footer-social {
+    gap: 1.2rem;
+    font-size: 1.2rem;
   }
 }

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import '../assets/Header.css';
 
 function PokeballIcon() {
-  // SVG Pokeball simple y colorida
+  // SVG Pokeball 
   return (
     <svg viewBox="0 0 48 48" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
       <circle cx="24" cy="24" r="22" fill="#fff" stroke="#222" strokeWidth="3"/>
