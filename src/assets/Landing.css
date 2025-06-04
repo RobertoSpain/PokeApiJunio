@@ -12,22 +12,22 @@ html, body {
   flex-direction: column;
 }
 
-/* Estilos para la página de inicio */
 .seccion-inicio {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 1.2rem 2rem 1.2rem 2rem;
+  padding: 0.5rem 2rem 0 2rem; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   border-radius: 20px;
   position: relative;
-  min-height: 90vh;
+  flex: 1 0 auto; 
+  min-height: 0;
   box-sizing: border-box;
-  flex: 1 0 auto;
 }
 
+/* Estilos para la página de inicio */
 .contenido-inicio {
   width: 100%;
   display: flex;
@@ -49,19 +49,23 @@ html, body {
 
 /* Sección central - imagen de fondo */
 .seccion-fondo {
-  height: 600px;
+  height: 600px; 
   background: url('/fondo.png') no-repeat center center;
   background-size: cover;
-  border-radius: 30px;
-  margin: 0.2rem 0 1.2rem 0;
+  border-radius: 0; 
+  margin: 0.2rem 0 0.7rem 0; /* Sin márgenes laterales */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
-  width: 100%;
-  min-width: 0;
+  width: 100vw; 
+  min-width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-50%);
 }
 
 /* Sección inferior - características */
 .contenedor-caracteristicas {
-  padding: 1.5rem 1rem 1.5rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem; 
   border-radius: 20px;
   box-shadow: none;
   background: none;
@@ -72,7 +76,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem; 
 }
 
 .titulo {
@@ -184,15 +188,15 @@ html, body {
   width: 100vw;
   left: 0;
   right: 0;
-  position: relative;
+  position: relative; 
   background: #232629;
   color: #fff;
   text-align: center;
-  padding: 2.5rem 1rem 2rem 1rem;
+  padding: 1.2rem 1rem 1.2rem 1rem; 
   margin: 0;
   transform: none;
-  margin-top: 2rem;
   box-sizing: border-box;
+  z-index: 10;
 }
 .footer-landing .footer-main {
   font-size: 1.3rem;
@@ -234,8 +238,15 @@ html, body {
 
 /* Responsive */
 @media (max-width: 768px) {
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
   .seccion-inicio {
-    padding: 0.5rem;
+    padding: 0.2rem;
+    flex: 1 0 auto;
+    min-height: 0;
   }
   .inicio-principal,
   .contenedor-caracteristicas {
@@ -264,7 +275,7 @@ html, body {
   }
   .footer-landing {
     font-size: 0.95rem;
-    padding: 1.5rem 0.2rem 1.5rem 0.2rem;
+    padding: 0.8rem 0.2rem 0.8rem 0.2rem;
   }
   .footer-landing .footer-social {
     gap: 1.2rem;

@@ -36,16 +36,16 @@ function Landing() {
         <div className="footer-author">
           Proyecto Realizado con React ⚛️ por Roberto España
                Código disponible en{' '}
-          <a href="https://github.com/robertogarcia" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/RobertoSpain/PokeApiJunio" target="_blank" rel="PokeApiJunio">
             Github
           </a>
         </div>
         <div className="footer-social">
-          <a href="https://www.linkedin.com/in/robertogarcia" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/roberto-espa%C3%B1a-540552208/" target="_blank" rel="noopener noreferrer">
             Linkedin
           </a>
-          <a href="https://instagram.com/robertogarcia" target="_blank" rel="noopener noreferrer">
-            Instagram
+          <a href="https://www.facebook.com/roberto.espana.58/?locale=es_ES" target="_blank" rel="noopener noreferrer">
+            Facebook
           </a>
         </div>
       </footer>
