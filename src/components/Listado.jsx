@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Detalle } from './Detalle';
+import { useNavigate } from 'react-router-dom';
 import '../assets/Listado.css';
 
 const API_URL = 'https://pokeapi.co/api/v2/pokemon';
@@ -7,7 +7,6 @@ const API_URL = 'https://pokeapi.co/api/v2/pokemon';
 export function Listado() {
   const [pokemones, setPokemones] = useState([]);
   const [offset, setOffset] = useState(0);
-  const [pokemonSeleccionado, setPokemonSeleccionado] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const [inputBusqueda, setInputBusqueda] = useState("");
   const [pokemonBusqueda, setPokemonBusqueda] = useState(null);
@@ -65,6 +64,8 @@ export function Listado() {
     ? (pokemonBusqueda ? [pokemonBusqueda] : [])
     : pokemones;
 
+  const navigate = useNavigate();
+
   return (
     <section className="listado-section">
       <h2>Pokémons</h2>
@@ -95,7 +96,7 @@ export function Listado() {
             <div
               key={p.name}
               className="pokemon-card"
-              onClick={() => setPokemonSeleccionado(id)}
+              onClick={() => navigate(`/detalles/${id}`)}
             >
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
@@ -120,9 +121,6 @@ export function Listado() {
           Cargar más
         </button>
       </div>
-      {pokemonSeleccionado && (
-        <Detalle id={pokemonSeleccionado} onClose={() => setPokemonSeleccionado(null)} />
-      )}
     </section>
   );
 }

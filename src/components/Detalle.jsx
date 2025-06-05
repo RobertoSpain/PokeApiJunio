@@ -1,33 +1,36 @@
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../assets/Detalle.css';
 
-export function Detalle({ id, onClose }) {
-  const [datosPokemon, setDatosPokemon] = useState([]);
+export function Detalle() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [pokemon, setPokemon] = useState(null);
 
   useEffect(() => {
-    if (id) {
-      fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-        .then(response => response.json())
-        .then(datos => setDatosPokemon([datos]))
-        .catch(() => setDatosPokemon([]));
-    }
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+      .then(res => res.json())
+      .then(data => setPokemon(data))
+      .catch(() => setPokemon(null));
   }, [id]);
 
-  const mostrarDetalles = datosPokemon.map((datoPokemon) => (
-    <div className="detallesPokemon" key={datoPokemon.id}>
-      <button className="btn-close" onClick={onClose}>✖</button>
+  if (!pokemon) return <div>Cargando...</div>;
+
+  return (
+    <div className="detallesPokemon">
+      <button className="btn-close" onClick={() => navigate(-1)}>✖</button>
       <div className="contenido">
         <div className="img">
-          <img src={datoPokemon.sprites.other['official-artwork'].front_default} alt={datoPokemon.species.name} className="imgDetalle" />
+          <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name} className="imgDetalle" />
         </div>
         <div className="text">
-          <h1 className="nombrePokemon">{datoPokemon.species.name}</h1>
+          <h1 className="nombrePokemon">{pokemon.name}</h1>
           <div className="information">
             <div className="typeAbility">
               <div className="types">
                 <h2>Types</h2>
                 <ul>
-                  {datoPokemon.types.map((type, i) => (
+                  {pokemon.types.map((type, i) => (
                     <li className={type.type.name} key={i}>{type.type.name}</li>
                   ))}
                 </ul>
@@ -35,7 +38,7 @@ export function Detalle({ id, onClose }) {
               <div className="abilities">
                 <h2>Abilities</h2>
                 <ul>
-                  {datoPokemon.abilities.map((ability, i) => (
+                  {pokemon.abilities.map((ability, i) => (
                     <li key={i}>{ability.ability.name}</li>
                   ))}
                 </ul>
@@ -44,7 +47,7 @@ export function Detalle({ id, onClose }) {
             <div className="stats">
               <h2>Stats</h2>
               <ul>
-                {datoPokemon.stats.map((stat, i) => (
+                {pokemon.stats.map((stat, i) => (
                   <li key={i}>{stat.stat.name}: {stat.base_stat}</li>
                 ))}
               </ul>
@@ -55,13 +58,11 @@ export function Detalle({ id, onClose }) {
       <div className="moves">
         <h2>Moves</h2>
         <ul className="moves-container">
-          {datoPokemon.moves.map((move, i) => (
+          {pokemon.moves.map((move, i) => (
             <li key={i}>{move.move.name}</li>
           ))}
         </ul>
       </div>
     </div>
-  ));
-
-  return <>{mostrarDetalles}</>;
+  );
 }
