@@ -1,0 +1,61 @@
+.error404-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  background: linear-gradient(135deg, #ffe082 0%, #ffb300 100%);
+  color: #222;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+.error404-container h1 {
+  font-size: 7rem;
+  margin: 0;
+  color: #ee1515;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.error404-container h2 {
+  font-size: 2rem;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.error404-container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.error404-link {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background: #ee1515;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+}
+
+.error404-link:hover {
+  background: #b71c1c;
+}
+
+.error404-pokemon {
+  width: 160px;
+  margin: 1.5rem auto;
+  display: block;
+}
+
+.error404-interrogacion {
+  font-size: 3rem;
+  color: #ee1515;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  letter-spacing: 0.3rem;
+  text-align: center;
+}

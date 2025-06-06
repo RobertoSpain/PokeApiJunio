@@ -4,6 +4,7 @@ import Landing from './components/Landing';
 import Jugar from './components/Jugar';
 import { Listado } from './components/Listado';
 import { Detalle } from './components/Detalle';
+import Error404 from './components/error404';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/jugar" element={<Jugar />} />
         <Route path="/listado" element={<Listado />} />
         <Route path="/detalles/:id" element={<Detalle />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>
   );

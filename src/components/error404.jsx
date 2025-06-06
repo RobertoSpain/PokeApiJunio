@@ -5,6 +5,12 @@ export default function Error404() {
   return (
     <div className="error404-container">
       <h1>404</h1>
+      <div className="error404-interrogacion">¿ ?</div>
+      <img
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png"
+        alt="Psyduck confundido"
+        className="error404-pokemon"
+      />
       <h2>Página no encontrada</h2>
       <p>La ruta que buscas no existe.</p>
       <Link to="/" className="error404-link">Volver al inicio</Link>
