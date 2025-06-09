@@ -1,16 +1,25 @@
+// Importa hooks de React y el hook de navegación de React Router
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/Listado.css';
 
+// URL base de la API de PokéAPI
 const API_URL = 'https://pokeapi.co/api/v2/pokemon';
 
 export function Listado() {
+  // Estado para la lista de pokemones
   const [pokemones, setPokemones] = useState([]);
+  // Estado para el offset de paginación
   const [offset, setOffset] = useState(0);
+  // Estado para el término de búsqueda actual
   const [busqueda, setBusqueda] = useState("");
+  // Estado para el input de búsqueda
   const [inputBusqueda, setInputBusqueda] = useState("");
+  // Estado para el resultado de la búsqueda
   const [pokemonBusqueda, setPokemonBusqueda] = useState(null);
+  // Estado para indicar si se está buscando
   const [buscando, setBuscando] = useState(false);
+  // Estado para mostrar errores de búsqueda
   const [errorBusqueda, setErrorBusqueda] = useState("");
 
   // Cargar más pokemones (solo si no hay búsqueda activa)
@@ -23,6 +32,7 @@ export function Listado() {
       });
   };
 
+  // Cargar los primeros 12 pokemones al montar el componente
   useEffect(() => {
     fetch(`${API_URL}?limit=12&offset=0`)
       .then((res) => res.json())
@@ -59,16 +69,18 @@ export function Listado() {
       });
   };
 
-  // Decide qué pokemones mostrar
+  // Decide qué pokemones mostrar: si hay búsqueda, muestra el resultado, si no, la lista normal
   const pokemonesFiltrados = busqueda
     ? (pokemonBusqueda ? [pokemonBusqueda] : [])
     : pokemones;
 
+  // Hook para navegar a la página de detalles
   const navigate = useNavigate();
 
   return (
     <section className="listado-section">
       <h2>Pokémons</h2>
+      {/* Formulario de búsqueda */}
       <form className="listado-busqueda-container" onSubmit={buscarPokemon} autoComplete="off">
         <input
           type="text"
@@ -78,6 +90,7 @@ export function Listado() {
           className="listado-busqueda"
         />
         <button type="submit" className="buscar-btn">Buscar</button>
+        {/* Botón para limpiar la búsqueda */}
         {busqueda && (
           <button type="button" className="limpiar-btn" onClick={() => {
             setBusqueda("");
@@ -91,6 +104,7 @@ export function Listado() {
       {errorBusqueda && <div className="listado-error">{errorBusqueda}</div>}
       <div className="listado-grid">
         {pokemonesFiltrados.map((p) => {
+          // Extrae el id del Pokémon desde la URL
           const id = p.url.split('/').filter(Boolean).pop();
           return (
             <div

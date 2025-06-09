@@ -1,6 +1,8 @@
+// Importa el componente Link de React Router para la navegación
 import { Link } from 'react-router-dom';
 import '../assets/Header.css';
 
+// Componente que dibuja el icono de Pokeball usando SVG
 function PokeballIcon() {
   // SVG Pokeball 
   return (
@@ -14,12 +16,14 @@ function PokeballIcon() {
   );
 }
 
+// Componente principal del header de la aplicación
 function Header() {
   return (
     <header>
       <span className="logo left">
         <PokeballIcon />
       </span>
+      {/* Navegación principal */}
       <nav>
         <Link to="/">Inicio</Link>
         <Link to="/listado">Pokemons</Link>
