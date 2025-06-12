@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import "../assets/jugar.css";
-// Si tienes Firebase configurado, descomenta las siguientes líneas:
-// import { db } from "../firebase";
-// import { collection, addDoc } from "firebase/firestore";
-// import { getAuth } from "firebase/auth";
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function Jugar() {
   const [pokemon, setPokemon] = useState(null);
@@ -65,20 +63,17 @@ export default function Jugar() {
     }
   }
 
-  // Si tienes Firebase configurado, descomenta esta función:
-  /*
-  function guardarPuntuacion(puntos) {
-    const auth = getAuth();
-    const usuario = auth.currentUser;
-    if (!usuario) return;
-    addDoc(collection(db, "rankings"), {
-      userId: usuario.uid,
-      nombre: usuario.displayName || usuario.email,
-      puntos: puntos,
-      timestamp: new Date(),
-    }).catch((err) => console.error("Error al guardar la puntuación:", err));
+  // Función para guardar la puntuación en Firestore
+  async function guardarPuntuacion(puntos) {
+    try {
+      await addDoc(collection(db, "rankings"), {
+        puntos: puntos,
+        timestamp: new Date(),
+      });
+    } catch (err) {
+      console.error("Error al guardar la puntuación:", err);
+    }
   }
-  */
 
   function verificarRespuesta() {
     if (!pokemon || respuesta.trim() === "") {
@@ -92,9 +87,8 @@ export default function Jugar() {
       if (nuevosPuntos > record) {
         setRecord(nuevosPuntos);
         localStorage.setItem("recordPuntos", nuevosPuntos);
+        guardarPuntuacion(nuevosPuntos); // Guarda en Firestore si es récord
       }
-      // Si tienes Firebase configurado, descomenta la siguiente línea:
-      // guardarPuntuacion(nuevosPuntos);
       setPuntos(nuevosPuntos);
       setTimeout(cargarPokemon, 1500);
     } else {
