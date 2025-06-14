@@ -21,26 +21,60 @@ export function Listado() {
   const [buscando, setBuscando] = useState(false);
   // Estado para mostrar errores de búsqueda
   const [errorBusqueda, setErrorBusqueda] = useState("");
+  // Estado para indicar si se está cargando la lista inicial o más pokémon
+  const [cargando, setCargando] = useState(true);
+
+  // Al montar, intenta recuperar pokemones y offset de localStorage
+  useEffect(() => {
+    const pokemonesGuardados = localStorage.getItem('pokemones');
+    const offsetGuardado = localStorage.getItem('offset');
+    if (pokemonesGuardados && offsetGuardado) {
+      setPokemones(JSON.parse(pokemonesGuardados));
+      setOffset(Number(offsetGuardado));
+      setCargando(false);
+    } else {
+      setCargando(true);
+      fetch(`${API_URL}?limit=12&offset=0`)
+        .then((res) => res.json())
+        .then((data) => {
+          setPokemones(data.results);
+          setOffset(12);
+          setCargando(false);
+          // Guarda en localStorage
+          localStorage.setItem('pokemones', JSON.stringify(data.results));
+          localStorage.setItem('offset', '12');
+        });
+    }
+  }, []);
+
+  // Cada vez que cambian los pokemones o el offset, guarda en localStorage
+  useEffect(() => {
+    if (pokemones.length > 0) {
+      localStorage.setItem('pokemones', JSON.stringify(pokemones));
+      localStorage.setItem('offset', offset.toString());
+    }
+  }, [pokemones, offset]);
 
   // Cargar más pokemones (solo si no hay búsqueda activa)
   const cargarMasPokemones = () => {
+    setCargando(true);
     fetch(`${API_URL}?limit=12&offset=${offset}`)
       .then((res) => res.json())
       .then((data) => {
-        setPokemones((prev) => [...prev, ...data.results]);
-        setOffset((prevOffset) => prevOffset + 12);
+        setPokemones((prev) => {
+          const nuevos = [...prev, ...data.results];
+          // Guarda en localStorage
+          localStorage.setItem('pokemones', JSON.stringify(nuevos));
+          return nuevos;
+        });
+        setOffset((prevOffset) => {
+          const nuevoOffset = prevOffset + 12;
+          localStorage.setItem('offset', nuevoOffset.toString());
+          return nuevoOffset;
+        });
+        setCargando(false);
       });
   };
-
-  // Cargar los primeros 12 pokemones al montar el componente
-  useEffect(() => {
-    fetch(`${API_URL}?limit=12&offset=0`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPokemones(data.results);
-        setOffset(12); // La siguiente carga empezará en el 13
-      });
-  }, []);
 
   // Buscar globalmente en la PokéAPI solo al pulsar el botón
   const buscarPokemon = (e) => {
@@ -101,6 +135,7 @@ export function Listado() {
         )}
       </form>
       {buscando && <div className="listado-buscando">Buscando...</div>}
+      {cargando && !buscando && <div className="listado-buscando">Cargando...</div>}
       {errorBusqueda && <div className="listado-error">{errorBusqueda}</div>}
       <div className="listado-grid">
         {pokemonesFiltrados.map((p) => {
@@ -129,10 +164,10 @@ export function Listado() {
         <button
           onClick={cargarMasPokemones}
           className="cargar-mas-btn"
-          disabled={busqueda.length > 0}
+          disabled={busqueda.length > 0 || cargando}
           title={busqueda.length > 0 ? 'Desactiva la búsqueda para cargar más' : ''}
         >
-          Cargar más
+          {cargando ? 'Cargando...' : 'Cargar más'}
         </button>
       </div>
     </section>

@@ -20,12 +20,12 @@ export function Detalle() {
   }, [id]);
 
   // Muestra un mensaje de carga si los datos aún no están disponibles
-  if (!pokemon) return <div>Cargando...</div>;
+  if (!pokemon) return <div style={{transition: 'opacity 0.3s'}}>Cargando...</div>;
 
   return (
     <div className="detallesPokemon">
       {/* Botón para volver atrás */}
-      <button className="btn-close" onClick={() => navigate(-1)}>✖</button>
+      <button className="btn-close" onClick={() => navigate(-1)} type="button">✖</button>
       <div className="contenido">
         <div className="img">
           {/* Imagen oficial del Pokémon */}
