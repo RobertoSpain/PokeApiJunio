@@ -1,27 +1,32 @@
+// Componente de registro de usuario para la aplicación
+// Permite a un nuevo usuario registrarse con usuario y contraseña
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../assets/login&registro.css';
 
-function Registro() {
+function RegistroUsuario() {
+  // Estados locales para usuario, contraseña y errores
   const [usuario, setUsuario] = useState('');
-  const [password, setPassword] = useState('');
+  const [contrasena, setContrasena] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const navegar = useNavigate(); // Hook para navegación entre rutas
 
-  const handleSubmit = (e) => {
+  // Maneja el envío del formulario de registro
+  const manejarEnvio = (e) => {
     e.preventDefault();
-    // Simulación de registro básico (sustituir por Firebase Auth en el futuro)
-    if (usuario && password) {
-      // Aquí guardarías el usuario en la base de datos
-      navigate('/login');
+    if (usuario && contrasena) {
+      // Aquí guardarías el usuario en la base de datos 
+      navegar('/login'); // Redirige al usuario a la pantalla de login tras registrarse
     } else {
-      setError('Usuario y contraseña obligatorios');
+      setError('Usuario y contraseña obligatorios'); // Muestra error si faltan datos
     }
   };
 
+  // Renderiza el formulario de registro
   return (
     <section className="registro-section">
       <h2>Registro</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={manejarEnvio}>
         <input
           type="text"
           placeholder="Usuario"
@@ -31,17 +36,14 @@ function Registro() {
         <input
           type="password"
           placeholder="Contraseña"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
+          value={contrasena}
+          onChange={e => setContrasena(e.target.value)}
         />
         <button type="submit">Registrarse</button>
         {error && <div className="registro-error">{error}</div>}
       </form>
-      <div className="registro-redes">
-        <button disabled>Google</button>
-      </div>
     </section>
   );
 }
 
-export default Registro;
+export default RegistroUsuario;

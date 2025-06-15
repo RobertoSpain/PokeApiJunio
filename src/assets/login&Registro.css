@@ -1,0 +1,95 @@
+/* Estilos simples para login e registro */
+.login-section, .registro-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.login-section h2, .registro-section h2 {
+  font-size: 2rem;
+  color: #226600;
+  margin-bottom: 1.5rem;
+}
+
+.login-section form, .registro-section form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Nuevo: contenedor para los botones sociales */
+.social-login-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1.2rem;
+  justify-content: center;
+}
+
+.login-section input[type="text"],
+.login-section input[type="password"],
+.registro-section input[type="text"],
+.registro-section input[type="password"] {
+  padding: 0.5rem 1rem;
+  border: 1px solid #bbb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background: #fff;
+}
+
+.login-section button[type="submit"],
+.registro-section button[type="submit"] {
+  padding: 0.5rem 1.5rem;
+  background: #ffcb05;
+  color: #222;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.login-section button[type="submit"]:hover,
+.registro-section button[type="submit"]:hover {
+  background: #3b4cca;
+  color: #fff;
+}
+
+/* Botón Google */
+.google-btn {
+  background: #4caf50;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.google-btn:hover {
+  background: #357a38;
+}
+
+.login-error, .registro-error {
+  color: #d32f2f;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.registro-redes {
+  margin-top: 1rem;
+}
+
+.registro-redes button {
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: #e0e0e0;
+  color: #555;
+  font-weight: bold;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
