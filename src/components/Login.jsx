@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../firebase"; // Ajusta la ruta si tu archivo firebase está en otro lugar
-import '../assets/login&registro.css';
+import '../assets/loginYRegistro.css';
 
 function IniciarSesion({ onLogin }) {
   // Estados locales para usuario, contraseña y errores
