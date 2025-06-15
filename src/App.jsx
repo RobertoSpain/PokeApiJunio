@@ -9,6 +9,7 @@ import { Detalle } from './components/Detalle';
 import Error404 from './components/error404';
 import Login from './components/Login';
 import Registro from './components/Registro';
+import Ranking from './components/Ranking'; // Asegúrate de que la ruta de importación sea correcta
 import { useState } from 'react';
 
 // Componente principal de la aplicación
@@ -38,6 +39,7 @@ function App() {
         <Route path="/detalles/:id" element={<Detalle />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/ranking" element={<Ranking />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>

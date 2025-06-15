@@ -28,6 +28,7 @@ function Header({ usuario, onLogout }) {
         <Link to="/">Inicio</Link>
         <Link to="/listado">Pokemons</Link>
         <Link to="/jugar">Jugar</Link>
+        <Link to="/ranking">Ranking</Link>
         {/* Mostrar login/registro o usuario y logout */}
         {usuario ? (
           <>
