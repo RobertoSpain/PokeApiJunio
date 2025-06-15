@@ -17,7 +17,7 @@ function PokeballIcon() {
 }
 
 // Componente principal del header de la aplicación
-function Header() {
+function Header({ usuario, onLogout }) {
   return (
     <header>
       <span className="logo left">
@@ -28,6 +28,18 @@ function Header() {
         <Link to="/">Inicio</Link>
         <Link to="/listado">Pokemons</Link>
         <Link to="/jugar">Jugar</Link>
+        {/* Mostrar login/registro o usuario y logout */}
+        {usuario ? (
+          <>
+            <span className="header-usuario">Hola, {usuario}</span>
+            <button className="header-logout" onClick={onLogout}>Cerrar Sesión</button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Iniciar Sesión</Link>
+            <Link to="/registro">Registro</Link>
+          </>
+        )}
       </nav>
       <span className="logo right">
         <PokeballIcon />

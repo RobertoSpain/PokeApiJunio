@@ -64,15 +64,19 @@ export default function Jugar() {
   }
 
   // Función para guardar la puntuación en Firestore
-  async function guardarPuntuacion(puntos) {
-    try {
-      await addDoc(collection(db, "rankings"), {
-        puntos: puntos,
-        timestamp: new Date(),
-      });
-    } catch (err) {
+  function guardarPuntuacion(puntos) {
+    const usuario = localStorage.getItem('usuario') || 'Anónimo';
+    addDoc(collection(db, "rankings"), {
+      usuario: usuario,
+      puntos: puntos,
+      timestamp: new Date(),
+    })
+    .then(() => {
+      // Opcional: mensaje de éxito
+    })
+    .catch((err) => {
       console.error("Error al guardar la puntuación:", err);
-    }
+    });
   }
 
   function verificarRespuesta() {
