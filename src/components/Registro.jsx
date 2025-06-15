@@ -2,7 +2,6 @@
 // Permite a un nuevo usuario registrarse con usuario y contraseña
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/login&registro.css';
 
 function RegistroUsuario() {
   // Estados locales para usuario, contraseña y errores
