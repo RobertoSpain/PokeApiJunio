@@ -24,12 +24,12 @@ export function Listado() {
   // Estado para indicar si se está cargando la lista inicial o más pokémon
   const [cargando, setCargando] = useState(true);
 
-  // Al montar el componente, intenta recuperar pokemones y offset de localStorage
+  // Al montar el componente, intenta recuperar pokemones y offset de sessionStorage
   // Si hay datos guardados, los usa para no volver a pedirlos a la API
-  // Si no hay datos, pide los primeros 12 pokémon a la API y los guarda en localStorage
+  // Si no hay datos, pide los primeros 12 pokémon a la API y los guarda en sessionStorage
   useEffect(() => {
-    const pokemonesGuardados = localStorage.getItem('pokemones');
-    const offsetGuardado = localStorage.getItem('offset');
+    const pokemonesGuardados = sessionStorage.getItem('pokemones');
+    const offsetGuardado = sessionStorage.getItem('offset');
     if (pokemonesGuardados && offsetGuardado) {
       setPokemones(JSON.parse(pokemonesGuardados));
       setOffset(Number(offsetGuardado));
@@ -42,23 +42,23 @@ export function Listado() {
           setPokemones(data.results);
           setOffset(12);
           setCargando(false);
-          // Guarda en localStorage para persistencia
-          localStorage.setItem('pokemones', JSON.stringify(data.results));
-          localStorage.setItem('offset', '12');
+          // Guarda en sessionStorage
+          sessionStorage.setItem('pokemones', JSON.stringify(data.results));
+          sessionStorage.setItem('offset', '12');
         });
     }
   }, []);
 
-  // Cada vez que cambian los pokemones o el offset, guarda en localStorage
+  // Cada vez que cambian los pokemones o el offset, guarda en sessionStorage
   // Así, si el usuario recarga la página, no pierde el listado ni la página actual
   useEffect(() => {
     if (pokemones.length > 0) {
-      localStorage.setItem('pokemones', JSON.stringify(pokemones));
-      localStorage.setItem('offset', offset.toString());
+      sessionStorage.setItem('pokemones', JSON.stringify(pokemones));
+      sessionStorage.setItem('offset', offset.toString());
     }
   }, [pokemones, offset]);
 
-  // Función para cargar más pokemones (paginación)
+  // Función para cargar más pokemones 
   // Solo se puede usar si NO hay búsqueda activa
   const cargarMasPokemones = () => {
     setCargando(true);
@@ -67,13 +67,13 @@ export function Listado() {
       .then((data) => {
         setPokemones((prev) => {
           const nuevos = [...prev, ...data.results];
-          // Guarda en localStorage la lista actualizada
-          localStorage.setItem('pokemones', JSON.stringify(nuevos));
+          // Guarda en sessionStorage la lista actualizada
+          sessionStorage.setItem('pokemones', JSON.stringify(nuevos));
           return nuevos;
         });
         setOffset((prevOffset) => {
-          const nuevoOffset = prevOffset + 12;
-          localStorage.setItem('offset', nuevoOffset.toString());
+          const nuevoOffset = prevOffset + 12; //carga mas pokemons
+          sessionStorage.setItem('offset', nuevoOffset.toString());
           return nuevoOffset;
         });
         setCargando(false);

@@ -11,13 +11,11 @@ export default function Jugar() {
   const [respuesta, setRespuesta] = useState("");
   // Mensaje de feedback para el usuario (acierto, error, etc)
   const [mensaje, setMensaje] = useState("");
-  // Si es true, se revela el Pokémon (se quita la silueta)
   const [revelar, setRevelar] = useState(false);
   // Número de intentos fallidos en la ronda actual
   const [intentos, setIntentos] = useState(0);
   // Puntos acumulados en la sesión
   const [puntos, setPuntos] = useState(0);
-  // Récord máximo guardado en localStorage
   const [record, setRecord] = useState(
     localStorage.getItem("recordPuntos") || 0
   );
@@ -51,7 +49,7 @@ export default function Jugar() {
 
   // Función para cargar un Pokémon aleatorio de la PokéAPI
   function cargarPokemon() {
-    const id = Math.floor(Math.random() * 1010) + 1; // Hay 1010 Pokémon
+    const id = Math.floor(Math.random() * 1010) + 1; 
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
       .then((res) => res.json())
       .then((data) => {
