@@ -9,22 +9,24 @@ const API_URL = 'https://pokeapi.co/api/v2/pokemon';
 export function Listado() {
   // Estado para la lista de pokemones
   const [pokemones, setPokemones] = useState([]);
-  // Estado para el offset de paginación
+  // Estado para el offset de paginación (desde qué número empieza la siguiente página)
   const [offset, setOffset] = useState(0);
-  // Estado para el término de búsqueda actual
+  // Estado para el término de búsqueda actual (lo que se ha buscado)
   const [busqueda, setBusqueda] = useState("");
-  // Estado para el input de búsqueda
+  // Estado para el input de búsqueda (lo que el usuario está escribiendo)
   const [inputBusqueda, setInputBusqueda] = useState("");
-  // Estado para el resultado de la búsqueda
+  // Estado para el resultado de la búsqueda (si se encuentra un Pokémon concreto)
   const [pokemonBusqueda, setPokemonBusqueda] = useState(null);
-  // Estado para indicar si se está buscando
+  // Estado para indicar si se está buscando un Pokémon
   const [buscando, setBuscando] = useState(false);
   // Estado para mostrar errores de búsqueda
   const [errorBusqueda, setErrorBusqueda] = useState("");
   // Estado para indicar si se está cargando la lista inicial o más pokémon
   const [cargando, setCargando] = useState(true);
 
-  // Al montar, intenta recuperar pokemones y offset de localStorage
+  // Al montar el componente, intenta recuperar pokemones y offset de localStorage
+  // Si hay datos guardados, los usa para no volver a pedirlos a la API
+  // Si no hay datos, pide los primeros 12 pokémon a la API y los guarda en localStorage
   useEffect(() => {
     const pokemonesGuardados = localStorage.getItem('pokemones');
     const offsetGuardado = localStorage.getItem('offset');
@@ -40,7 +42,7 @@ export function Listado() {
           setPokemones(data.results);
           setOffset(12);
           setCargando(false);
-          // Guarda en localStorage
+          // Guarda en localStorage para persistencia
           localStorage.setItem('pokemones', JSON.stringify(data.results));
           localStorage.setItem('offset', '12');
         });
@@ -48,6 +50,7 @@ export function Listado() {
   }, []);
 
   // Cada vez que cambian los pokemones o el offset, guarda en localStorage
+  // Así, si el usuario recarga la página, no pierde el listado ni la página actual
   useEffect(() => {
     if (pokemones.length > 0) {
       localStorage.setItem('pokemones', JSON.stringify(pokemones));
@@ -55,7 +58,8 @@ export function Listado() {
     }
   }, [pokemones, offset]);
 
-  // Cargar más pokemones (solo si no hay búsqueda activa)
+  // Función para cargar más pokemones (paginación)
+  // Solo se puede usar si NO hay búsqueda activa
   const cargarMasPokemones = () => {
     setCargando(true);
     fetch(`${API_URL}?limit=12&offset=${offset}`)
@@ -63,7 +67,7 @@ export function Listado() {
       .then((data) => {
         setPokemones((prev) => {
           const nuevos = [...prev, ...data.results];
-          // Guarda en localStorage
+          // Guarda en localStorage la lista actualizada
           localStorage.setItem('pokemones', JSON.stringify(nuevos));
           return nuevos;
         });
@@ -76,7 +80,8 @@ export function Listado() {
       });
   };
 
-  // Buscar globalmente en la PokéAPI solo al pulsar el botón
+  // Función para buscar un Pokémon por nombre o número
+  // Solo busca cuando el usuario pulsa el botón o Enter
   const buscarPokemon = (e) => {
     e.preventDefault();
     if (inputBusqueda.trim().length === 0) return;
@@ -103,12 +108,14 @@ export function Listado() {
       });
   };
 
-  // Decide qué pokemones mostrar: si hay búsqueda, muestra el resultado, si no, la lista normal
+  // Decide qué pokemones mostrar:
+  // - Si hay búsqueda, muestra solo el resultado de la búsqueda (si existe)
+  // - Si no hay búsqueda, muestra la lista normal paginada
   const pokemonesFiltrados = busqueda
     ? (pokemonBusqueda ? [pokemonBusqueda] : [])
     : pokemones;
 
-  // Hook para navegar a la página de detalles
+  // Hook para navegar a la página de detalles de un Pokémon
   const navigate = useNavigate();
 
   return (
@@ -124,7 +131,7 @@ export function Listado() {
           className="listado-busqueda"
         />
         <button type="submit" className="buscar-btn">Buscar</button>
-        {/* Botón para limpiar la búsqueda */}
+        {/* Botón para limpiar la búsqueda y volver al listado normal */}
         {busqueda && (
           <button type="button" className="limpiar-btn" onClick={() => {
             setBusqueda("");
@@ -134,32 +141,40 @@ export function Listado() {
           }}>Limpiar</button>
         )}
       </form>
+      {/* Mensaje de estado si se está buscando o cargando */}
       {buscando && <div className="listado-buscando">Buscando...</div>}
       {cargando && !buscando && <div className="listado-buscando">Cargando...</div>}
+      {/* Mensaje de error si la búsqueda falla */}
       {errorBusqueda && <div className="listado-error">{errorBusqueda}</div>}
+      {/* Grid de tarjetas de Pokémon */}
       <div className="listado-grid">
         {pokemonesFiltrados.map((p) => {
-          // Extrae el id del Pokémon desde la URL
+          // Extrae el id del Pokémon desde la URL de la API
           const id = p.url.split('/').filter(Boolean).pop();
           return (
             <div
               key={p.name}
               className="pokemon-card"
+              // Al hacer click, navega a la página de detalles de ese Pokémon
               onClick={() => navigate(`/detalles/${id}`)}
             >
+              {/* Imagen SVG del Pokémon (dream-world) */}
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
                 alt={p.name}
                 className="pokemon-img"
               />
+              {/* Nombre del Pokémon */}
               <b className="pokemon-name">{p.name}</b>
             </div>
           );
         })}
       </div>
+      {/* Mensaje si no hay resultados */}
       {pokemonesFiltrados.length === 0 && !buscando && !errorBusqueda && (
         <div className="listado-error listado-vacio">No se encontraron Pokémon.</div>
       )}
+      {/* Botón para cargar más pokemones (desactivado si hay búsqueda o si está cargando) */}
       <div className="listado-cargar-mas">
         <button
           onClick={cargarMasPokemones}
