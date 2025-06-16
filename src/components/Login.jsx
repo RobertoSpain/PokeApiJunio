@@ -2,7 +2,7 @@
 // Permite al usuario iniciar sesión con usuario/contraseña o Google
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase"; // Ajusta la ruta si tu archivo firebase está en otro lugar
 import '../assets/loginYRegistro.css';
 
@@ -17,8 +17,14 @@ function IniciarSesion({ onLogin }) {
   const manejarEnvio = (e) => {
     e.preventDefault();
     if (usuario && contrasena) {
-      onLogin(usuario); // Llama a la función de login recibida por props
-      navegar('/'); // Redirige al usuario a la página principal
+      signInWithEmailAndPassword(auth, usuario, contrasena)
+        .then((result) => {
+          onLogin(result.user.displayName || result.user.email || result.user.uid); // Llama a onLogin con el nombre, email o uid de Google
+          navegar('/'); // Redirige al usuario a la página principal
+        })
+        .catch(() => {
+          setError('Usuario o contraseña incorrectos'); // Muestra error si faltan datos
+        });
     } else {
       setError('Usuario y contraseña obligatorios'); // Muestra error si faltan datos
     }
@@ -56,7 +62,7 @@ function IniciarSesion({ onLogin }) {
         />
         <button type="submit">Entrar</button>
       </form>
-      {/* Solo botón de Google */}
+      {/* botón de Google */}
       <div className="social-login-buttons">
         <button className="google-btn" onClick={manejarGoogle}>
           Google

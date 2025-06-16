@@ -2,6 +2,8 @@
 // Permite a un nuevo usuario registrarse con usuario y contraseña
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 function RegistroUsuario() {
   // Estados locales para usuario, contraseña y errores
@@ -14,8 +16,13 @@ function RegistroUsuario() {
   const manejarEnvio = (e) => {
     e.preventDefault();
     if (usuario && contrasena) {
-      // Aquí guardarías el usuario en la base de datos 
-      navegar('/login'); // Redirige al usuario a la pantalla de login tras registrarse
+      createUserWithEmailAndPassword(auth, usuario, contrasena)
+        .then(() => {
+          navegar('/login'); // Redirige al login tras registrar
+        })
+        .catch(() => {
+          setError('Error al registrar usuario');
+        });
     } else {
       setError('Usuario y contraseña obligatorios'); // Muestra error si faltan datos
     }
