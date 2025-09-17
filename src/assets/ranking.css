@@ -42,3 +42,35 @@
   font-weight: bold;
   margin-top: 1.5rem;
 }
+
+@media (max-width: 700px) {
+  .ranking-section {
+    max-width: 98vw;
+    margin: 10px auto;
+    padding: 1rem 0.3rem;
+    border-radius: 0.7rem;
+  }
+  .ranking-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .ranking-table {
+    font-size: 0.95rem;
+    border-radius: 0.4rem;
+  }
+  .ranking-table th, .ranking-table td {
+    padding: 0.5rem 0.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ranking-section {
+    padding: 0.5rem 0.1rem;
+  }
+  .ranking-table {
+    font-size: 0.85rem;
+  }
+  .ranking-table th, .ranking-table td {
+    padding: 0.3rem 0.1rem;
+  }
+}
