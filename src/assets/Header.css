@@ -56,13 +56,18 @@ nav a:hover {
     margin: 0 auto 1rem auto;
     border-radius: 0;
     padding: 6px;
-    width: 100%;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   header .logo {
     height: 30px;
     width: 30px;
-    margin: 0 8px;
+    margin: 0 8px 0 8px;
+    align-self: center;
   }
 
   header .logo img, header .logo svg {
@@ -71,12 +76,34 @@ nav a:hover {
   }
 
   nav {
-    gap: 0.8rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.5rem;
   }
 
   nav a {
-    font-size: 0.9rem;
-    padding: 3px 6px;
+    font-size: 1.1rem;
+    padding: 8px 0;
+    width: 90vw;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 12px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 3px;
+  }
+
+  nav a {
+    font-size: 1rem;
+    padding: 6px 0;
+    width: 98vw;
+    border-radius: 10px;
   }
 }
 
